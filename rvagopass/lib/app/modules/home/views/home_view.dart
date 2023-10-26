@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:rvagopass/app/modules/paiement/views/paiement_view.dart';
 
 import '../controllers/home_controller.dart';
 
@@ -7,50 +9,38 @@ class HomeView extends GetView<HomeController> {
   const HomeView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    HomeController controller = Get.put<HomeController>(HomeController());
     return Scaffold(
+       appBar: AppBar(
+        title: const Text("Controle de taxe"),
+        actions: <Widget>[
+          //IconButton
+          IconButton(
+            icon: const Icon(Icons.settings),
+            tooltip: 'Setting Icon',
+            onPressed: () {},
+          ), //IconButton
+        ], //<Widget>[]
+        backgroundColor:  Colors.blue.shade300,
+        elevation: 50.0,
+        leading: IconButton(
+          icon: const Icon(Icons.menu),
+          tooltip: 'Menu Icon',
+          onPressed: () {
+            Get.to(() => PaiementView());
+          },
+        ),
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+      ), //AppBar
       //backgroundColor: Colors.grey[100],
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top:14.0),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top:20.0,left: 30),
-                child: Row(
-                  children: [
-                   Container(
-                    height: 50,
-                    width: 20,
-                    decoration:const BoxDecoration(
-                      
-                     // color: Colors.black,
-                      borderRadius: BorderRadius.all(Radius.circular(10))
-                     ),
-                    child:  IconButton(onPressed: (){}, icon:const Icon(Icons.settings),)
-                   ),
-                   Expanded(
-                     child: Padding(
-                       padding: const EdgeInsets.only(left:200.0),
-                       
-                       child: Container(
-                        width: 20,
-                        decoration:const BoxDecoration(
-                         // color: Colors.black,
-                          borderRadius: BorderRadius.all(Radius.circular(10))
-                         ),
-                        child:IconButton(onPressed: (){},icon: const Icon(Icons.supervised_user_circle),),
-                       ),
-                     ),
-                   ),
-                    
-                  ],
-                  
-                ),
-              ),
-              
                Column(
                   children: [
-                   const Text("Paiement Document Scan"),
+                   const Text("Paiement Document Scan",style: TextStyle(fontSize: 24,fontWeight: FontWeight.bold),),
                     Container(
                       //child: ,
                     ),
@@ -80,7 +70,7 @@ class HomeView extends GetView<HomeController> {
                     width: 400,
                     
                     decoration: BoxDecoration(     
-                      color:Colors.grey[300],
+                      color:Colors.grey[100],
                       
                       borderRadius:const BorderRadius.only(topLeft: Radius.circular(20),topRight: Radius.circular(20))
                      ),
@@ -91,11 +81,12 @@ class HomeView extends GetView<HomeController> {
                           Expanded(
                             child: Column(
                               children: [
-                                Text(" RVA GOMA "),
+                                Text(" RVA GOMA",style:TextStyle( fontWeight: FontWeight.bold)),
                                 Text("CONTROL DE LA TAXE IDDEF "),
                                 Text(""),
                                 Text("Bienvenue ici nous faisons le controle de la taxe de go pass pour permetre la reabilitation des aeroports de la RDC ",style: TextStyle(fontStyle: FontStyle.italic,fontSize: 14),),
                                 Text("cher agent notre application est tres simple a utiliser il  suffut de prendre le document du passager scanner et puis voir si son document est bien authentique ",style: TextStyle(fontStyle: FontStyle.italic,fontSize: 14)),
+                                 Text("cher agent notre application est tres simple a utiliser il  suffut de prendre le document du passager scanner et puis voir si son document est bien authentique ",style: TextStyle(fontStyle: FontStyle.italic,fontSize: 14)),
                               ],
                             ),
                           ),
@@ -108,12 +99,12 @@ class HomeView extends GetView<HomeController> {
                    ),
                  ),
                  Padding(
-                   padding: const EdgeInsets.only(top:200.0),
+                   padding: const EdgeInsets.only(top:220.0),
                    child: Container(                  
                     height: 220,
                     width: 400,
                      decoration: BoxDecoration(
-                      color: Colors.grey[200],
+                      color: Colors.grey[100],
                       borderRadius:const BorderRadius.only(
                         topLeft: Radius.circular(20),
                         topRight:Radius.circular(20))
@@ -126,11 +117,14 @@ class HomeView extends GetView<HomeController> {
                           child: Center(
                             child: Container(
                               width: 325,
-                              decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(40)),
-                              color: Colors.white70,
+                              decoration:  BoxDecoration(
+                                borderRadius:const BorderRadius.all(Radius.circular(40)),
+                              //color: Colors.white70,
+                              color: Colors.blue.shade300,
                               ),
-                              child:TextButton(onPressed:() {}, child:const Text("Scanner")),
+                              child:TextButton(onPressed:() {
+                                controller.scannerQrCode();
+                              }, child:const Text("Scanner",style: TextStyle(color: Colors.white),)),
                             ),
                           ),
                         ),                     

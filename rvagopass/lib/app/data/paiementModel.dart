@@ -3,6 +3,7 @@ class PaiementModel {
   int? id;
    String?  motif;
    String? datepaiement;
+   String? telephone;
    String? passager;
    String? genre;
    String? emailPassager;
@@ -13,6 +14,7 @@ class PaiementModel {
   PaiementModel(
       {this.id,
       this.motif,
+      this.telephone,
       this.datepaiement,
       this.passager,
       this.emailPassager,
@@ -25,6 +27,7 @@ class PaiementModel {
       id: json['id'],
       motif: json['motif'],
       datepaiement: json['datepaiement'],
+      telephone: json['telephone'],
       passager: json['passager'],
       emailPassager: json['emailpass'],
       agePassager: json['age_passager'],
